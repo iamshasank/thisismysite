@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My First Website</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #2563eb;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background: #1e40af;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    section {
+      padding: 20px;
+      text-align: center;
+    }
+    footer {
+      background: #111827;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Welcome to My Website</h1>
+    <p>Learning HTML is fun!</p>
+  </header>
+
+  <nav>
+    <a onclick="showHome()">Home</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </nav>
+
+  <section id="main-content">
+    <h2>Hello, Friend!</h2>
+    <p>This is a basic HTML website created with Notepad.</p>
+    <p>You can now share or edit it as you like!</p>
+  </section>
+
+  <footer>
+    &copy; 2025 MyWebsite. All rights reserved.
+  </footer>
+
+  <script>
+    function showHome() {
+      document.getElementById("main-content").innerHTML =
+        '<h2>Welcome to Home</h2>' +
+        '<p>This is the homepage content with an image below.</p>' +
+        '<img src="myphoto.png" alt="Sample Image">';
+    }
+  </script>
+
+</body>
+</html>
