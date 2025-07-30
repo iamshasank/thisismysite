@@ -56,15 +56,16 @@
   </header>
 
   <nav>
-    <a onclick="showHome()">Home</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
+    <a onclick="showPage('home')">Home</a>
+    <a onclick="showPage('about')">About</a>
+    <a onclick="showPage('contact')">Contact</a>
   </nav>
 
   <section id="main-content">
-    <h2>Hello, Friend!</h2>
-    <p>This is a basic HTML website created with Notepad.</p>
-    <p>You can now share or edit it as you like!</p>
+    <!-- Default content -->
+    <h2>Home</h2>
+    <p>This is the homepage content with an image below.</p>
+    <img src="myphoto.png" alt="Sample Image">
   </section>
 
   <footer>
@@ -72,11 +73,30 @@
   </footer>
 
   <script>
-    function showHome() {
-      document.getElementById("main-content").innerHTML =
-        '<h2>Welcome to Home</h2>' +
-        '<p>This is the homepage content with an image below.</p>' +
-        '<img src="myphoto.png" alt="Sample Image">';
+    function showPage(page) {
+      let content = "";
+
+      if (page === "home") {
+        content = `
+          <h2>Home</h2>
+          <p>This is the homepage content with an image below.</p>
+          <img src="myphoto.png" alt="Sample Image">
+        `;
+      } else if (page === "about") {
+        content = `
+          <h2>About Us</h2>
+          <p>This website was created to practice HTML and web development basics.</p>
+          <p>We're learning how to structure pages, apply styles, and add interactivity.</p>
+        `;
+      } else if (page === "contact") {
+        content = `
+          <h2>Contact Us</h2>
+          <p>You can reach us at: <strong>contact@mywebsite.com</strong></p>
+          <p>We're open to feedback and collaboration. Drop a message anytime!</p>
+        `;
+      }
+
+      document.getElementById("main-content").innerHTML = content;
     }
   </script>
 
