@@ -46,6 +46,27 @@
       height: auto;
       margin-top: 20px;
     }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #2563eb;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: left;
+    }
   </style>
 </head>
 <body>
@@ -62,7 +83,6 @@
   </nav>
 
   <section id="main-content">
-    <!-- Default content -->
     <h2>Home</h2>
     <p>This is the homepage content with an image below.</p>
     <img src="myphoto.png" alt="Sample Image">
@@ -91,8 +111,22 @@
       } else if (page === "contact") {
         content = `
           <h2>Contact Us</h2>
-          <p>You can reach us at: <strong>contact@mywebsite.com</strong></p>
-          <p>We're open to feedback and collaboration. Drop a message anytime!</p>
+          <p>We'd love to hear from you! Fill out the form below.</p>
+          <form action="https://formsubmit.co/itsmeshasank@gmail.com" method="POST">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="text" name="_honey" style="display:none">
+
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br>
+
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required><br>
+
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message" rows="5" required></textarea><br>
+
+            <button type="submit">Submit</button>
+          </form>
         `;
       }
 
