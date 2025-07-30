@@ -67,6 +67,18 @@
       margin: 0 auto;
       text-align: left;
     }
+    .comment-box {
+      max-width: 500px;
+      margin: 20px auto;
+      text-align: left;
+    }
+    .comment {
+      background: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
   </style>
 </head>
 <body>
@@ -93,6 +105,8 @@
   </footer>
 
   <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxLgmSTqsurV2RdlLDA7VWlId2lkVYcz4v9jkHmv1yrN36PTzEx1xgs7Ml8uU0_eq9sLg/exec";
+
     function showPage(page) {
       let content = "";
 
@@ -101,6 +115,15 @@
           <h2>Home</h2>
           <p>This is the homepage content with an image below.</p>
           <img src="myphoto.png" alt="Sample Image">
+          <div class="comment-box">
+            <h3>Leave a Comment</h3>
+            <form id="commentForm">
+              <input type="text" id="commentName" name="name" placeholder="Your name" required>
+              <textarea id="commentText" name="comment" rows="4" placeholder="Your comment" required></textarea>
+              <button type="submit">Post Comment</button>
+            </form>
+            <div id="comments"></div>
+          </div>
         `;
       } else if (page === "about") {
         content = `
@@ -131,8 +154,49 @@
       }
 
       document.getElementById("main-content").innerHTML = content;
+      if (page === "home") {
+        document.getElementById("commentForm").addEventListener("submit", submitComment);
+        fetchComments();
+      }
+    }
+
+    function submitComment(event) {
+      event.preventDefault();
+      const name = document.getElementById("commentName").value.trim();
+      const comment = document.getElementById("commentText").value.trim();
+
+      if (name && comment) {
+        const formData = new FormData();
+        formData.append("name", name);
+        formData.append("comment", comment);
+
+        fetch(scriptURL, {
+          method: "POST",
+          body: formData
+        })
+        .then(() => {
+          document.getElementById("commentName").value = "";
+          document.getElementById("commentText").value = "";
+          fetchComments();
+        })
+        .catch(() => alert("Failed to submit comment"));
+      }
+    }
+
+    function fetchComments() {
+      fetch(scriptURL + "?read=true")
+        .then(res => res.json())
+        .then(data => {
+          const container = document.getElementById("comments");
+          container.innerHTML = "";
+          data.forEach(entry => {
+            const div = document.createElement("div");
+            div.className = "comment";
+            div.innerHTML = `<strong>${entry.name}</strong><br>${entry.comment}`;
+            container.appendChild(div);
+          });
+        });
     }
   </script>
-
 </body>
 </html>
